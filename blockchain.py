@@ -1,4 +1,4 @@
-# Module 1 - Create a blockchain
+# Phase 1 - Create and mine blockchain
 
 # Flask 0.12.2 installed
 
@@ -9,7 +9,7 @@ import hashlib
 import json
 from flask import Flask, jsonify
 
-# Part 1 - Building a blockchain
+# Part 1 - Build blockchain
 
 class Blockchain:
     
@@ -62,13 +62,13 @@ class Blockchain:
 
 # Part 2 - Mining our blockchain
 
-# Creating a web app
+# Create web app
 app = Flask(__name__)
 
-# Creating a blockchain
+# Create blockchain
 blockchain = Blockchain()
 
-# Mining a new block
+# Mine new block
 @app.route('/mine_block', methods = ['GET'])
 def mine_block():
     previous_block = blockchain.get_previous_block()
@@ -84,14 +84,14 @@ def mine_block():
                 }
     return jsonify(response), 200
     
-# Getting the full blockchain
+# Get full blockchain
 @app.route('/get_chain', methods = ['GET'])
 def get_chain():
     response = {'chain' : blockchain.chain,
                 'length' : len(blockchain.chain)}
     return jsonify(response), 200
 
-# Checking chain validity
+# Check chain validity
 @app.route('/is_valid', methods = ['GET'])
 def is_valid():
     is_valid = blockchain.is_chain_valid(blockchain.chain)
@@ -101,5 +101,5 @@ def is_valid():
         response = {'message' : 'Blockchain nos NOT valid.'}
     return jsonify(response), 200
 
-# Running the app          
+# Run app          
 app.run(host = '0.0.0.0', port = 5000)
